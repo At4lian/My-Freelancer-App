@@ -1,11 +1,9 @@
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-full flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
-          <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-            <div className="w-full max-w-sm">
-            {children}
-            </div>
-          </div>
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-10">
+      <div className="w-full max-w-sm">
+        {children}
+      </div>
     </div>
   );
 };

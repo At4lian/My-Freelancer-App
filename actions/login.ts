@@ -101,23 +101,24 @@ export const login = async (
       return { twoFactor: true };
     }
   }
-
   try {
     await signIn("credentials", {
       email,
       password,
       redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
-    })
+    });
   } catch (error) {
     if (error instanceof AuthError) {
-      switch (error.type) {
+      const authError = error as AuthError;
+  
+      switch (authError.name) {
         case "CredentialsSignin":
-          return { error: "Invalid credentials!" }
+          return { error: "Invalid credentials!" };
         default:
-          return { error: "Something went wrong!" }
+          return { error: "Something went wrong!" };
       }
     }
-
+  
     throw error;
   }
 };

@@ -7,13 +7,14 @@ import { newVerification } from "@/actions/new-verification";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { Skeleton } from "../ui/skeleton";
 
 
 
 
 export const NewVerificationForm = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Skeleton className="h-96 w-full" />}>
       <NewVerificationFormContent />
     </Suspense>
   );

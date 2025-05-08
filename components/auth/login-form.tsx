@@ -22,10 +22,11 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { login } from "@/actions/login";
+import { Skeleton } from "../ui/skeleton";
 
 export const LoginForm = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Skeleton className="h-96 w-full" />}>
       <LoginFormContent />
     </Suspense>
   );

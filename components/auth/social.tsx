@@ -7,11 +7,12 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { Suspense } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 
 export const Social = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Skeleton className="h-96 w-full" />}>
       <SocialContent />
     </Suspense>
   );

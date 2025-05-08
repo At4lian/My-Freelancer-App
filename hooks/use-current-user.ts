@@ -1,7 +1,7 @@
-import { useSession } from "next-auth/react";
+"use client"
+import { useCustomSession } from "./use-custom-session";
 
 export const useCurrentUser = () => {
-  const session = useSession();
-
-  return session.data?.user;
+  const { session } = useCustomSession()
+  return session?.user;
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { newVerification } from "@/actions/new-verification";
@@ -8,7 +8,21 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 
+
+
+
 export const NewVerificationForm = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <NewVerificationFormContent />
+    </Suspense>
+  );
+};
+
+
+
+
+const NewVerificationFormContent = () => {
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
 

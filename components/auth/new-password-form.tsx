@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { useState, useTransition } from "react";
+import { Suspense, useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -23,6 +23,14 @@ import { FormSuccess } from "@/components/form-success";
 import { newPassword } from "@/actions/new-password";
 
 export const NewPasswordForm = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <NewPasswordFormContent />
+    </Suspense>
+  );
+};
+
+const NewPasswordFormContent = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 

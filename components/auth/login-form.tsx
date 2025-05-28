@@ -21,7 +21,7 @@ import { CardWrapper } from "@/components/auth/card-wrapper"
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { login } from "@/actions/login";
+import { login } from "@/actions/auth/login";
 import { Skeleton } from "../ui/skeleton";
 
 export const LoginForm = () => {

@@ -1,26 +1,26 @@
-import { db } from "@/lib/db"
-import { currentUser } from "@/lib/auth"
+import { db } from "@/lib/db";
+import { requireUser } from "@/hooks/require-user";
 
 export async function GET() {
+  const session = await requireUser();
   try {
-    const user = await currentUser()
-
-    if (!user || !user.id) {
-      return new Response("Unauthorized", { status: 401 })
-    }
-
     const projects = await db.project.findMany({
       where: {
-        userId: user.id,
+        userId: session.user?.id,
       },
-      orderBy: {
-        createdAt: "desc"
+      include: {
+        customer: {
+          select: {
+            name: true
+          }
+        }
       }
-    })
-
-    return new Response(JSON.stringify(projects), { status: 200 })
+    });
+    return new Response(JSON.stringify(projects), { status: 200 });
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
-    return new Response(`Error fetching projects: ${errorMessage}`, { status: 500 })
+    console.error(error); // Zobrazí chybu v konzoli pro lepší diagnostiku
+    return new Response('Error fetching projects', { status: 500 });
   }
 }
+
+

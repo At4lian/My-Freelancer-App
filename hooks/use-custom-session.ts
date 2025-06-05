@@ -12,12 +12,22 @@ export function useCustomSession() {
 
   const pathname = usePathname();
 
-  //TODO: When logging out of your account, the session is not updated. An interesting fact is that the update occurs if you lose the focus of a browser tab and go back.
+  // Refresh session on mount and when the tab becomes active so that
+  // signOut() executed on the server properly clears client session state.
   useEffect(() => {
-    update().then((s) => {
-      setUpdatedSession(s);
-    });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const refresh = () => {
+      update().then((s) => {
+        setUpdatedSession(s);
+      });
+    };
+
+    refresh();
+    window.addEventListener("visibilitychange", refresh);
+
+    return () => {
+      window.removeEventListener("visibilitychange", refresh);
+    };
+  }, [update]);
 
   const session =
     publicRoutes.includes(pathname) || authRoutes.includes(pathname)

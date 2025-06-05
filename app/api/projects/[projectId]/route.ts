@@ -33,7 +33,7 @@ export async function GET(
     }
 
     return NextResponse.json(project);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Chyba serveru' },
       { status: 500 }

@@ -68,16 +68,3 @@ export const RegisterSchema = z.object({
 
 
 
-//
-
-export const CreateProjectSchema = z.object({
-  name: z.string().min(1, "You need to enter a project name!"),
-  description: z.string().optional(),
-  startDate: z.date().optional(),
-  endDate: z.date().optional(),
-  deadlineDate: z.date().optional(),
-  customerId: z.string().min(1, "You need to select a customer!"),
-  priority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"], {
-    errorMap: () => ({ message: "You must select a prirotiy!" }),
-  }),
-});

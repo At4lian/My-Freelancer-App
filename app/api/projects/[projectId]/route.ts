@@ -1,13 +1,11 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { requireUser } from "@/hooks/require-user";
 
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ projectId: string }> }
 ) {
-  const session = await requireUser();
   try {
     const resolvedParams = await params;
     
@@ -20,8 +18,7 @@ export async function GET(
 
     const project = await db.project.findUnique({
       where: { 
-        id: resolvedParams.projectId,
-        userId: session.user?.id,
+        id: resolvedParams.projectId
       },
     });
 
@@ -35,7 +32,7 @@ export async function GET(
     return NextResponse.json(project);
   } catch (error) {
     return NextResponse.json(
-      { error: 'Chyba serveru' },
+      { error: error instanceof Error ? error.message : 'Internal Server Error' },
       { status: 500 }
     );
   }

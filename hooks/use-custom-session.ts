@@ -15,7 +15,11 @@ export function useCustomSession() {
   //TODO: When logging out of your account, the session is not updated. An interesting fact is that the update occurs if you lose the focus of a browser tab and go back.
   useEffect(() => {
     update().then((s) => {
-      setUpdatedSession(s);
+      if (s) {
+        setUpdatedSession(s);
+      } else {
+        setUpdatedSession(null);
+      }
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

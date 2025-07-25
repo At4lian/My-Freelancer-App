@@ -30,7 +30,7 @@ export async function GET(
     }
 
     return NextResponse.json(project);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Internal Server Error' },
       { status: 500 }
